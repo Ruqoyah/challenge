@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HomePage = () => (
-  <div>
+  <div className="bg-black">
     Welcome
   </div>
 );
