@@ -1,11 +1,11 @@
 import express from 'express';
-import { createBuyRequest, createSellRequest } from '../controllers/index'
+import { loadRequest, getRequests } from '../controllers/index'
 
 const router = express.Router();
 
 
-router.post('/api/buy-requests', createBuyRequest);
+router.post('/api/requests', loadRequest);
 
-router.post('/api/sell-requests', createSellRequest);
+router.get('/api/requests', getRequests);
 
 export default router;
