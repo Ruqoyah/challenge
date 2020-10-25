@@ -10,25 +10,52 @@ const SellRequestSchema = new Schema({
   productName: {
     type: String,
     trim: true,
-    unique: true,
     required: true
   },
   carrier: {
     type: String,
-    trim: true,
-    required: true
-  },
-  condition: {
-    type: String,
-    trim: true,
-    required: true
   },
   storageSize: {
     type: String,
     trim: true,
     required: true
   },
-  price: {
+  new: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  a1: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  a2: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  b1: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  b2: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  c: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  cB: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  cD: {
     type: String,
     trim: true,
     required: true

@@ -12,12 +12,21 @@ const getAuthToken = () => {
         .catch((error) => error)
 }
 
-const getSpreadSheetValues = ({ spreadsheetId, auth, sheetName }) => {
+const getLastRange = ({ spreadsheetId, auth, sheetName }) => {
+    return sheets.spreadsheets.values.get({
+        spreadsheetId, 
+        auth, 
+        range: sheetName
+    })
+    .then((response) => response.data.values.length)
+    .catch((error) => error)
+}
+
+const getSpreadSheetValues = async ({ spreadsheetId, auth, sheetNameRange }) => {
     return sheets.spreadsheets.values.get({
         spreadsheetId,
         auth,
-        range: sheetName,
-        // majorDimension: "COLUMNS"
+        range: sheetNameRange
     })
         .then((response) => response)
         .catch((error) => error)
@@ -25,5 +34,6 @@ const getSpreadSheetValues = ({ spreadsheetId, auth, sheetName }) => {
 
 module.exports = {
     getAuthToken,
+    getLastRange,
     getSpreadSheetValues
 }
