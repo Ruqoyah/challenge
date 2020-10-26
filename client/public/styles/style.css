@@ -1,0 +1,56 @@
+body {
+    background-color: #1a202c;
+}
+
+.checkbox-item {
+    display: block;
+    position: relative;
+    margin: 10px 0 0;
+}
+  
+.checkbox-item input[type='radio'] {
+    display: none;
+}
+
+.checkbox-item label:before {
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin: 0 15px 0 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    border: 2px solid #1a202c;
+    cursor: pointer;
+}
+
+.checkbox-item input[type=radio]:checked + label:after {
+    position: absolute;
+    top: 5px;
+    padding: 2px 5px;
+    font-size: 9px;
+    content: "✓";
+    display: block;
+    color: #fff;
+    background-color: #1a202c;
+}
+
+.sidebar {
+    left: -270px;
+    transition: width,left,right,.3s;
+}
+
+.toggled {
+    left: 0;
+    transition: width,left,right,.3s;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.3);
+}

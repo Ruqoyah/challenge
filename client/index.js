@@ -5,6 +5,7 @@ import App from './components/App';
 import store from '../client/store';
 import './public/styles/style.css';
 import './public/tailwind/style.css';
+import 'rc-slider/assets/index.css';
 
 const configureStore = store();
 
