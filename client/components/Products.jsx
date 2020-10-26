@@ -16,7 +16,22 @@ const Products = ({ sellRequests, handlePageChange, loading }) => (
                         </div>
                         <div className="h-24 md:h-32 overflow-hidden">
                             <img
-                                src={"images/5.png"}
+                                src={
+                                    sellRequest.name ==='iPhone 7 Plus' ? "images/iphone_7_plus.png" :
+                                    sellRequest.name ==='iPhone 7' ? "images/iphone_7.png" :
+                                    sellRequest.name ==='iPhone XS Max' ? "images/iphone_xs_max.png" :
+                                    sellRequest.name ==='iPhone XS' ? "images/iphone_xs.png" :
+                                    sellRequest.name ==='iPhone XR' ? "images/iphone_xr.png" :
+                                    sellRequest.name ==='iPhone 8 PLUS' ? "images/iphone_8_plus.png" :
+                                    sellRequest.name ==='iPhone 8' ? "images/iphone_8.png" :
+                                    sellRequest.name ==='iPhone 6 Plus' ? "images/iphone_6_plus.png" :
+                                    sellRequest.name ==='iPhone 6' ? "images/iphone_6.png" :
+                                    sellRequest.name ==='iPhone 6S Plus' ? "images/iphone_6s_plus.png" :
+                                    sellRequest.name ==='iPhone 6S' ? "images/iphone_6s.png" :
+                                    sellRequest.name ==='iPhone SE' ? "images/iphone_se.png" :
+                                    sellRequest.name ==='iPhone X' ? "images/X.png" :
+                                    null
+                                }
                                 alt="5"
                                 className="h-full m-auto object-cover"
                             />
