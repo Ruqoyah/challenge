@@ -1,3 +1,5 @@
+const { parse } = require("path");
+
 const formatData = (data) => {
     const dataArray = [];
 
@@ -27,16 +29,31 @@ const formatData = (data) => {
         accumulateProduct[lastIndex].specification.forEach((spec, specIndex) => {
             if (spec.length < 1) {
                 currentProduct['carrier'] = current[specIndex]
-                currentProduct['productName'] = accumulateProduct[lastIndex].productName
+                currentProduct['name'] = accumulateProduct[lastIndex].productName
             } else {
-                currentProduct[convertToCamel(spec)] = current[specIndex];
-                currentProduct['productName'] = accumulateProduct[lastIndex].productName
+                currentProduct[spec] = current[specIndex];
+                currentProduct['name'] = accumulateProduct[lastIndex].productName
             }
         });
 
-        dataArray.push(currentProduct)
+        let tempObj = {}
+        const finalFormattedProduct = []
+        for (let property in currentProduct) {
+
+            if (property === 'carrier' || property === 'name' || property === 'Storage Size') {
+                tempObj = { ...tempObj, [convertToCamel(property)]: currentProduct[property] };
+            } else {
+                tempObj = { ...tempObj, grade: property, price: Number(currentProduct[property].replace(",", "").replace("$", "")) }
+            }
+            if (tempObj.grade || tempObj.price) {
+                finalFormattedProduct.push(tempObj)
+            }
+        }
+
+        dataArray.push(...finalFormattedProduct)
 
         return accumulateProduct;
+        
     }, [])
 
     return dataArray;

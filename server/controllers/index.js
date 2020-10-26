@@ -38,7 +38,7 @@ export const loadRequest = async (req, res) => {
           SellRequest.insertMany(formatData(sellRequestSheets.data.values))
           .then(() => {
             return res.status(200).json({
-              projects: 'Request loaded Successfully',
+              response: 'Request loaded Successfully',
             });
           })
           .catch((error) => res.status(500).json({ error }));
@@ -58,15 +58,36 @@ export const loadRequest = async (req, res) => {
  */
 export const getRequests = async (req, res) => {
 
-  const { fetch, page = 1, limit = 15 } = req.query;
+  const { fetch, page = 1, limit = 15, storageSize, grade, name, priceMin, priceMax } = req.query;
 
-  const buyRequestCount = await BuyRequest.count();
+  const buyRequestCount = await BuyRequest.count({
+    price: { $gte: priceMin, $lte: priceMax },
+      $or: [
+        {storageSize: new RegExp('^'+storageSize+'$', "i")}, 
+        {grade: new RegExp('^'+grade+'$', "i")}, 
+        {name}
+      ]
+  })
 
-  const sellRequestCount = await SellRequest.count();
+  const sellRequestCount = await SellRequest.count({
+    price: { $gte: priceMin, $lte: priceMax },
+      $or: [
+        {storageSize: new RegExp('^'+storageSize+'$', "i")}, 
+        {grade: new RegExp('^'+grade+'$', "i")}, 
+        {name}
+      ]
+  })
 
   if(fetch === 'buy') {
 
-    BuyRequest.find()
+    BuyRequest.find({ 
+      price: { $gte: priceMin, $lte: priceMax },
+      $or: [
+        {storageSize: new RegExp('^'+storageSize+'$', "i")}, 
+        {grade: new RegExp('^'+grade+'$', "i")}, 
+        {name}
+      ]
+    })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .then((response) => {
@@ -74,7 +95,8 @@ export const getRequests = async (req, res) => {
         return res.status(200).json({
           response,
           totalPages: Math.ceil(buyRequestCount / limit),
-          currentPage: page
+          currentPage: page,
+          count: buyRequestCount
         });
 
       })
@@ -82,7 +104,14 @@ export const getRequests = async (req, res) => {
       
   } else if (fetch === 'sell') {
 
-    SellRequest.find()
+    SellRequest.find({
+      price: { $gte: priceMin, $lte: priceMax },
+      $or: [
+        {storageSize: new RegExp('^'+storageSize+'$', "i")}, 
+        {grade: new RegExp('^'+grade+'$', "i")}, 
+        {name}
+      ]
+    })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .then(async(response) => {
@@ -90,7 +119,8 @@ export const getRequests = async (req, res) => {
         return res.status(200).json({
           response,
           totalPages: Math.ceil(sellRequestCount / limit),
-          currentPage: page
+          currentPage: page,
+          count: sellRequestCount
         });
 
       })
@@ -99,7 +129,7 @@ export const getRequests = async (req, res) => {
   } else {
 
     return res.status(400).json({
-      message: 'You need to pass query fetch=buy or fetch=sell'
+      error: 'You need to pass query fetch=buy or fetch=sell'
     });
 
   }

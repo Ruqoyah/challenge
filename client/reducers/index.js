@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import requestReducer from './requestReducer'
 
 /**
  * root reducer - contains all the reducers
@@ -9,6 +10,7 @@ import { combineReducers } from 'redux';
  *
  */
 const reducers = combineReducers({
+    request: requestReducer
 });
 
 export default reducers;

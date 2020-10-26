@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
  * SellRequest Schema
  */
 const SellRequestSchema = new Schema({
-  productName: {
+  name: {
     type: String,
     trim: true,
     required: true
@@ -20,45 +20,14 @@ const SellRequestSchema = new Schema({
     trim: true,
     required: true
   },
-  new: {
+  grade: {
     type: String,
     trim: true,
     required: true
   },
-  a1: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  a2: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  b1: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  b2: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  c: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  cB: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  cD: {
-    type: String,
-    trim: true,
-    required: true
+  price: {
+    type: Number,
+    trim: true
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
