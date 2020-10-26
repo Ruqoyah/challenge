@@ -1,4 +1,3 @@
-const { parse } = require("path");
 
 const formatData = (data) => {
     const dataArray = [];

@@ -3,7 +3,7 @@ const sheets = google.sheets('v4');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
-const getAuthToken = () => {
+export const getAuthToken = () => {
     const auth = new google.auth.GoogleAuth({
         scopes: SCOPES
     });
@@ -12,7 +12,7 @@ const getAuthToken = () => {
         .catch((error) => error)
 }
 
-const getLastRange = ({ spreadsheetId, auth, sheetName }) => {
+export const getLastRange = ({ spreadsheetId, auth, sheetName }) => {
     return sheets.spreadsheets.values.get({
         spreadsheetId, 
         auth, 
@@ -22,7 +22,7 @@ const getLastRange = ({ spreadsheetId, auth, sheetName }) => {
     .catch((error) => error)
 }
 
-const getSpreadSheetValues = async ({ spreadsheetId, auth, sheetNameRange }) => {
+export const getSpreadSheetValues = async ({ spreadsheetId, auth, sheetNameRange }) => {
     return sheets.spreadsheets.values.get({
         spreadsheetId,
         auth,
@@ -30,10 +30,4 @@ const getSpreadSheetValues = async ({ spreadsheetId, auth, sheetNameRange }) => 
     })
         .then((response) => response)
         .catch((error) => error)
-}
-
-module.exports = {
-    getAuthToken,
-    getLastRange,
-    getSpreadSheetValues
 }
